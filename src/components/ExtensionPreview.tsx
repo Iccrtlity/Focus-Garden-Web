@@ -27,7 +27,7 @@ function TitleBar() {
   return (
     <div className="flex items-center justify-between px-5 py-4 border-b border-white/5 bg-[#0a0e13]">
       <div className="flex items-center gap-2">
-        <img src="/src/assets/favicon.ico" className="w-5 h-5" alt="" />
+        <img src="/favicon.ico" className="w-5 h-5" alt="" />
         <span className="text-xs font-bold tracking-[0.18em] text-stone-200 uppercase">
           Focus Garden
         </span>
