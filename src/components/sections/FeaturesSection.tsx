@@ -23,8 +23,8 @@ const FEATURES: Feature[] = [
 
 export function FeaturesSection() {
   return (
-    <section className={`relative z-10 ${layout.maxWidth} mx-auto px-6 py-32 ${colors.borderDefault} border-t`}>
-      <div className="grid md:grid-cols-3 gap-8">
+    <section className={`relative z-10 ${layout.maxWidth} mx-auto px-6 py-16 md:py-32 ${colors.borderDefault} border-t`}>
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8">
         {FEATURES.map((feature) => (
           <FeatureCard
             key={feature.title}

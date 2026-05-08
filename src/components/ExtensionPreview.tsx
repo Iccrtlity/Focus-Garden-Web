@@ -23,7 +23,7 @@ export function ExtensionPreview() {
     <div className="relative group">
       <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-      <div className={`relative border ${colors.borderLight} rounded-[2rem] overflow-hidden shadow-2xl ${layout.smallWidth}`} style={{ backgroundColor: colors.surfaceCard }}>
+      <div className={`relative border ${colors.borderLight} rounded-[2rem] overflow-hidden shadow-2xl w-full max-w-[320px]`} style={{ backgroundColor: colors.surfaceCard }}>
         <ExtensionTitleBar />
         <ExtensionBody />
       </div>
