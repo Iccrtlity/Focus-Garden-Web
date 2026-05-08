@@ -1,7 +1,12 @@
 import { Play, RotateCcw, BarChart2, Settings } from 'lucide-react';
+import { colors, extension, layout } from '../lib/constants';
+import type { TimerRingProps, GardenCardProps } from '../lib/types';
 
-const CIRCUMFERENCE = 2 * Math.PI * 44; // r=44
+const SVG_CIRCUMFERENCE = 2 * Math.PI * 44; // SVG circle radius
 
+/**
+ * GitHub icon component
+ */
 function GitHubIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -10,29 +15,35 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Extension preview component - mockup of the Focus Garden extension UI
+ */
 export function ExtensionPreview() {
   return (
     <div className="relative group">
       <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-      <div className="relative bg-[#0d1117] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl w-[320px]">
-        <TitleBar />
-        <Body />
+      <div className={`relative border ${colors.borderLight} rounded-[2rem] overflow-hidden shadow-2xl ${layout.smallWidth}`} style={{ backgroundColor: colors.surfaceCard }}>
+        <ExtensionTitleBar />
+        <ExtensionBody />
       </div>
     </div>
   );
 }
 
-function TitleBar() {
+/**
+ * Extension window title bar with controls
+ */
+function ExtensionTitleBar() {
   return (
-    <div className="flex items-center justify-between px-5 py-4 border-b border-white/5 bg-[#0a0e13]">
+    <div className={`flex items-center justify-between px-5 py-4 border-b ${colors.borderDefault}`} style={{ backgroundColor: colors.surfaceBar }}>
       <div className="flex items-center gap-2">
         <img src="/favicon.ico" className="w-5 h-5" alt="" />
         <span className="text-xs font-bold tracking-[0.18em] text-stone-200 uppercase">
           Focus Garden
         </span>
       </div>
-      <div className="flex items-center gap-3 text-stone-500">
+      <div className={`flex items-center gap-3 ${colors.textSecondary}`}>
         <GitHubIcon className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
         <BarChart2 className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
         <Settings className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
@@ -41,18 +52,24 @@ function TitleBar() {
   );
 }
 
-function Body() {
+/**
+ * Extension window main content area
+ */
+function ExtensionBody() {
   return (
-    <div className="flex flex-col items-center px-8 pt-7 pb-7 gap-7 bg-[#0d1117]">
-      <SessionPill label="Focus" />
-      <TimerRing time="25:00" progress={1} />
-      <Controls />
-      <GardenCard emoji="🏜️" sessionCount={0} />
+    <div className="flex flex-col items-center px-8 pt-7 pb-7 gap-7" style={{ backgroundColor: colors.surfaceCard }}>
+      <SessionBadge label="Focus" />
+      <TimerRing time={extension.timerDefault} progress={1} />
+      <ControlsBar />
+      <GardenStatusCard emoji={extension.gardenEmoji} sessionCount={extension.sessionsDefault} />
     </div>
   );
 }
 
-function SessionPill({ label }: { label: string }) {
+/**
+ * Session status badge
+ */
+function SessionBadge({ label }: { label: string }) {
   return (
     <div className="bg-emerald-500/20 border border-emerald-500/30 rounded-full px-5 py-1">
       <span className="text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase">
@@ -62,14 +79,11 @@ function SessionPill({ label }: { label: string }) {
   );
 }
 
-interface TimerRingProps {
-  time: string;
-  /** 0–1 fill fraction */
-  progress: number;
-}
-
+/**
+ * Timer visualization ring with SVG arc
+ */
 function TimerRing({ time, progress }: TimerRingProps) {
-  const offset = CIRCUMFERENCE * (1 - progress);
+  const strokeOffset = SVG_CIRCUMFERENCE * (1 - progress);
 
   return (
     <div className="relative flex items-center justify-center w-48 h-48">
@@ -82,10 +96,10 @@ function TimerRing({ time, progress }: TimerRingProps) {
         <circle
           cx="50" cy="50" r="44"
           fill="none"
-          stroke="#10b981"
+          stroke={colors.accent}
           strokeWidth="5"
-          strokeDasharray={CIRCUMFERENCE}
-          strokeDashoffset={offset}
+          strokeDasharray={SVG_CIRCUMFERENCE}
+          strokeDashoffset={strokeOffset}
           strokeLinecap="round"
         />
       </svg>
@@ -94,11 +108,14 @@ function TimerRing({ time, progress }: TimerRingProps) {
   );
 }
 
-function Controls() {
+/**
+ * Timer control buttons (reset and play)
+ */
+function ControlsBar() {
   return (
     <div className="flex items-center gap-5">
       <button
-        className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+        className={`w-11 h-11 rounded-full bg-white/5 border ${colors.borderDefault} flex items-center justify-center hover:bg-white/10 transition-colors`}
         aria-label="Reset timer"
       >
         <RotateCcw className="w-4 h-4 text-stone-400" />
@@ -111,23 +128,21 @@ function Controls() {
         <Play className="w-7 h-7 text-black fill-current ml-0.5" />
       </button>
 
-      {/* Spacer keeps the play button visually centred */}
+      {/* Spacer for visual balance */}
       <div className="w-11 h-11" aria-hidden="true" />
     </div>
   );
 }
 
-interface GardenCardProps {
-  emoji: string;
-  sessionCount: number;
-}
-
-function GardenCard({ emoji, sessionCount }: GardenCardProps) {
+/**
+ * Garden status display card
+ */
+function GardenStatusCard({ emoji, sessionCount }: GardenCardProps) {
   return (
-    <div className="w-full bg-[#111820] border border-white/5 rounded-2xl p-5 flex flex-col items-center gap-2">
-      <span className="text-5xl" role="img" aria-label="garden">{emoji}</span>
+    <div className={`w-full border ${colors.borderDefault} rounded-2xl p-5 flex flex-col items-center gap-2`} style={{ backgroundColor: colors.surfaceOverlay }}>
+      <span className="text-5xl" role="img" aria-label="desert garden">{emoji}</span>
       <span className="text-sm text-stone-400 font-medium">
-        {sessionCount} Sessions today
+        {sessionCount} {sessionCount === 1 ? 'Session' : 'Sessions'} today
       </span>
     </div>
   );
