@@ -37,13 +37,13 @@ export function ExtensionPreview() {
 function ExtensionTitleBar() {
   return (
     <div className={`flex items-center justify-between px-5 py-4 border-b ${colors.borderDefault}`} style={{ backgroundColor: colors.surfaceBar }}>
-      <div className="flex items-center gap-2">
-        <img src="/favicon.ico" className="w-5 h-5" alt="" />
-        <span className="text-xs font-bold tracking-[0.18em] text-stone-200 uppercase">
+      <div className="flex items-center gap-2 min-w-0">
+        <img src="/favicon.svg" className="w-5 h-5 shrink-0" alt="" />
+        <span className="text-xs font-bold tracking-[0.18em] text-stone-200 uppercase truncate">
           Focus Garden
         </span>
       </div>
-      <div className={`flex items-center gap-3 ${colors.textSecondary}`}>
+      <div className={`flex items-center gap-3 shrink-0 ${colors.textSecondary}`}>
         <GitHubIcon className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
         <BarChart2 className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
         <Settings className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
