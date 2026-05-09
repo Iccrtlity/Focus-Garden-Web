@@ -3,7 +3,7 @@
  */
 
 export const BRAND_NAME = 'Focus Garden';
-export const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/focus-garden';
+export const CHROME_STORE_URL = 'https://chromewebstore.google.com/detail/focus-garden-block-websit/igkjojamgkbadkeflpflpcnhfhnjnelk';
 export const GITHUB_URL = 'https://github.com/Iccrtlity/Focus-Garden';
 export const GITHUB_ISSUES_URL = 'https://github.com/Iccrtlity/Focus-Garden/issues';
 

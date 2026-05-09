@@ -43,10 +43,10 @@ function ExtensionTitleBar() {
           Focus Garden
         </span>
       </div>
-      <div className={`flex items-center gap-3 shrink-0 ${colors.textSecondary}`}>
-        <GitHubIcon className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
-        <BarChart2 className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
-        <Settings className="w-4 h-4 hover:text-stone-300 cursor-pointer transition-colors" />
+      <div className={`flex items-center gap-3 shrink-0 ${colors.textSecondary}`} aria-hidden="true">
+        <GitHubIcon className="w-4 h-4" />
+        <BarChart2 className="w-4 h-4" />
+        <Settings className="w-4 h-4" />
       </div>
     </div>
   );

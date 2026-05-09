@@ -12,7 +12,7 @@ interface FeatureCardProps {
  */
 export function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
-    <div className={`group p-7 md:p-10 rounded-[2rem] bg-white/[0.02] ${colors.borderDefault} hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all`}>
+    <div className={`group p-7 md:p-10 rounded-[2rem] border bg-white/[0.02] ${colors.borderDefault} hover:border-emerald-500/30 hover:bg-white/[0.04] transition-all`}>
       <div className="w-14 h-14 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mb-8">
         {icon}
       </div>
