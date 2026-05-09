@@ -36,7 +36,7 @@ export function ExtensionPreview() {
  */
 function ExtensionTitleBar() {
   return (
-    <div className={`flex items-center justify-between px-5 py-4 border-b ${colors.borderDefault}`} style={{ backgroundColor: colors.surfaceBar }}>
+    <div className={`flex items-center justify-between gap-5 px-5 py-4 border-b ${colors.borderDefault}`} style={{ backgroundColor: colors.surfaceBar }}>
       <div className="flex items-center gap-2 min-w-0">
         <img src="/favicon.ico" className="w-5 h-5 shrink-0" alt="" />
         <span className="text-xs font-bold tracking-[0.18em] text-stone-200 uppercase truncate">
